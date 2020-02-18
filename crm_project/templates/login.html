@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <style>
+        .box1{
+            margin-top: 100px;
+        }
+        #v_code:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+{% include 'component/nav.html' %}
+<div class="container box1">
+    <div class="page-header">
+                <h1 style="text-align: center">欢迎来到CRM管理系统</h1>
+            </div>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+
+            <form class="form-horizontal login_box" action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="account_number" class=" control-label">请输入用户名</label>
+                    <input type="text" class="form-control" id="account_number" placeholder="请输入用户名" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2" class="control-label">请输入密码</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="请输入密码"
+                           name="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="account_number" class=" control-label">请输入验证码</label>
+                    <input type="text" class="form-control" id="account_number" placeholder="请输入验证码" name="v_code">
+
+                </div>
+                <div class="form-group">
+                        <img src="{% url 'v_code' %}" alt="" id="v_code">
+                    </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 记住我
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block  btn-info ">登录</button>
+                </div>
+                <p style="color: red;text-align: center">{{ error_msg  }}</p>
+            </form>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+<script src="/static/js/jquery-3.4.1.js"></script>
+<script src="/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script>
+    img = document.getElementById('v_code');
+    img.onclick = function () {
+        img.src += '?'
+    }
+</script>
+</body>
+</html>

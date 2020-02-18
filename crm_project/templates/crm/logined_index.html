@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block user_info %}
+    <li><a href="#">{{ request.user }}</a></li>
+    <li><a href="">注销</a></li>
+    <li><a href="">修改个人信息</a></li>
+{% endblock %}
+
+
+{% block contener %}
+    <div class="jumbotron text-center" style="height: 500px;">
+        <h1>欢迎来到销售员页面</h1>
+        <p>你可以对CRM管理系统进行你想要的操作</p>
+    </div>
+{% endblock %}

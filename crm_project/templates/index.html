@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block add_item %}
+    /add_author/
+{% endblock %}
+{% block user_info %}
+    <li><a href="">登录</a></li>
+    <li><a href="">注册</a></li>
+{% endblock %}
+{% block contener %}
+    <div class="jumbotron">
+        <h1>欢迎来到CRM管理系统</h1>
+        <p>请先登录或注册</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">登录</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">注册</a>
+        </p>
+    </div>
+{% endblock %}

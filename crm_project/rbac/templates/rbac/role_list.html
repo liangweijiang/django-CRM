@@ -1,0 +1,72 @@
+{% extends 'crm/logined_index.html' %}
+
+{% block contener %}
+
+    {% load rbac %}
+    <div class="luffy-container">
+        <div class="btn-group" style="margin: 5px 0">
+{#            {% if request|has_permission:'web:add_customer' %}#}
+{#                <a class="btn btn-default" href="{% url 'web:add_customer' %}">#}
+{#                    <i class="fa fa-plus-square" aria-hidden="true"></i> 添加客户#}
+{#                </a>#}
+{#            {% endif %}#}
+                        <a class="btn btn-default" href="{% url 'rbac:add_role' %}">
+                            <i class="fa fa-plus-square" aria-hidden="true"></i> 添加角色
+                        </a>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>权限</th>
+{#                <th>权限别名</th>#}
+                 <th>选项</th>
+{#                {% if request|has_permission:'web:edit_customer' or request|has_permission:'web:del_customer' %}#}
+                    {#           自定义filter过滤器        #}
+{#                    <th>选项</th>#}
+{#                {% endif %}#}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in role_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ row.name}}</td>
+{#                    <td>{{ row.permissions.all}}</td>#}
+
+                    <td>
+                        {% for permission in row.permissions.all %}
+                            {{ permission.title }};
+                        {% endfor %}
+                    </td>
+
+
+                    <td>
+                        <a style="color: #333333;" href="{% url 'rbac:edit_role' row.id %}">
+                            <i class="fa fa-edit" aria-hidden="true"></i></a>
+                        |
+                        <a style="color: #d9534f;" href="{% url 'rbac:del_role' row.id %}"><i class="fa fa-trash-o"></i></a>
+                    </td>
+{#                    {% if request|has_permission:'web:edit_customer' or request|has_permission:'web:del_customer' %}#}
+{#                        <td>#}
+{#                            {% if request|has_permission:'web:edit_customer' %}#}
+{#                                <a style="color: #333333;" href="{% url 'web:edit_customer' row.id %}">#}
+{#                                     <i class="fa fa-edit" aria-hidden="true"></i>#}
+{#                                </a>#}
+{#                            {% endif %}#}
+{#                            {% if request|has_permission:'web:del_customer' %}#}
+{#                                |<a style="color: #d9534f;" href="{% url 'web:del_customer' row.id %}">#}
+{#                                <i class="fa fa-trash-o"></i>#}
+{#                            </a>#}
+{#                            {% endif %}#}
+{#                        </td>#}
+{##}
+{#                    {% endif %}#}
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

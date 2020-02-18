@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/table_center.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    {% block css %}
+    
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CRM管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% block user_info %}
+
+                {% endblock %}
+            <li><a href="{% url 'index' %}">返回首页</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section onselectstart="return false;"> # 取消双击选中文字
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar list-group text-center">
+{#                <li class="list-group-item"><h4>信息摘要</h4></li>#}
+                {% load rbac %}
+                {% menu request %}
+
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            {% block search %}
+
+            {% endblock %}
+
+            <h1 class="page-header">{{ request.user }}的管理中心</h1>
+
+                {% block contener %}
+
+                {% endblock %}
+
+
+            </div>
+        </div>
+    </div>
+</section>
+{% block js %}
+
+{% endblock %}
+<script src="/static/js/jquery-3.4.1.js"></script>
+<script src="/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="{% static 'js/menu.js' %}"></script>
+</body>
+</html>
